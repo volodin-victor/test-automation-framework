@@ -1,11 +1,11 @@
 package net.volodin.steps;
 
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import net.volodin.testbase.BaseClass;
 import net.volodin.utils.CommonMethods;
 import net.volodin.utils.ConfigsReader;
-import org.junit.After;
-import org.junit.Before;
 
 public class Hooks {
     @Before
