@@ -99,7 +99,7 @@ public class CommonMethods extends PageInitializer {
      */
     public static void acceptAlert() {
         try {
-            Alert alert = driver.switchTo().alert();
+            Alert alert = getDriver().switchTo().alert();
             alert.accept();
         } catch (NoAlertPresentException e) {
             e.printStackTrace();
@@ -111,7 +111,7 @@ public class CommonMethods extends PageInitializer {
      */
     public static void dismissAlert() {
         try {
-            Alert alert = driver.switchTo().alert();
+            Alert alert = getDriver().switchTo().alert();
             alert.dismiss();
         } catch (NoAlertPresentException e) {
             e.printStackTrace();
@@ -127,7 +127,7 @@ public class CommonMethods extends PageInitializer {
         String alertText = null;
 
         try {
-            Alert alert = driver.switchTo().alert();
+            Alert alert = getDriver().switchTo().alert();
             alertText = alert.getText();
         } catch (NoAlertPresentException e) {
             e.printStackTrace();
@@ -143,7 +143,7 @@ public class CommonMethods extends PageInitializer {
      */
     public static void sendAlertText(String text) {
         try {
-            Alert alert = driver.switchTo().alert();
+            Alert alert = getDriver().switchTo().alert();
             alert.sendKeys(text);
         } catch (NoAlertPresentException e) {
             e.printStackTrace();
@@ -157,7 +157,7 @@ public class CommonMethods extends PageInitializer {
      */
     public static void switchToFrame(String nameOrId) {
         try {
-            driver.switchTo().frame(nameOrId);
+            getDriver().switchTo().frame(nameOrId);
         } catch (NoSuchFrameException e) {
             e.printStackTrace();
         }
@@ -170,7 +170,7 @@ public class CommonMethods extends PageInitializer {
      */
     public static void switchToFrame(int index) {
         try {
-            driver.switchTo().frame(index);
+            getDriver().switchTo().frame(index);
         } catch (NoSuchFrameException e) {
             e.printStackTrace();
         }
@@ -183,7 +183,7 @@ public class CommonMethods extends PageInitializer {
      */
     public static void switchToFrame(WebElement element) {
         try {
-            driver.switchTo().frame(element);
+            getDriver().switchTo().frame(element);
         } catch (NoSuchFrameException e) {
             e.printStackTrace();
         }
@@ -193,11 +193,11 @@ public class CommonMethods extends PageInitializer {
      * Method switches focus to a child window
      */
     public static void switchToChildWindow() {
-        String mainWindow = driver.getWindowHandle();
-        Set<String> windows = driver.getWindowHandles();
+        String mainWindow = getDriver().getWindowHandle();
+        Set<String> windows = getDriver().getWindowHandles();
         for (String window : windows) {
             if (window.equals(mainWindow)) {
-                driver.switchTo().window(window);
+                getDriver().switchTo().window(window);
             }
         }
     }
@@ -208,7 +208,7 @@ public class CommonMethods extends PageInitializer {
      * @return WebDriverWait object
      */
     public static WebDriverWait getWaitObject() {
-        return new WebDriverWait(driver, Constants.EXPLICIT_WAIT_TIME);
+        return new WebDriverWait(getDriver(), Constants.EXPLICIT_WAIT_TIME);
     }
 
     /**
@@ -260,7 +260,7 @@ public class CommonMethods extends PageInitializer {
      * @return JavascriptExecutor object
      */
     public static JavascriptExecutor getJsObject() {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
+        JavascriptExecutor js = (JavascriptExecutor) getDriver();
         return js;
     }
 
@@ -328,7 +328,7 @@ public class CommonMethods extends PageInitializer {
      * @return bytes
      */
     public static byte[] takeScreenshot(String filename) {
-        TakesScreenshot takeScreenSht = (TakesScreenshot) driver;
+        TakesScreenshot takeScreenSht = (TakesScreenshot) getDriver();
         byte[] pictureByte = takeScreenSht.getScreenshotAs(OutputType.BYTES);
         File pictureFile = takeScreenSht.getScreenshotAs(OutputType.FILE);
         String fileDest = Constants.SCREENSHOT_FILEPATH + filename + getTimeStamp()

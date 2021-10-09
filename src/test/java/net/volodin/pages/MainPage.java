@@ -10,6 +10,6 @@ public class MainPage {
     public WebElement appLogo;
 
     public MainPage() {
-        PageFactory.initElements(BaseClass.driver, this);
+        PageFactory.initElements(BaseClass.getDriver(), this);
     }
 }
