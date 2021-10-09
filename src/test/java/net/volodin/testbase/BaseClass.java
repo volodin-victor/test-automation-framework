@@ -10,7 +10,11 @@ import java.util.concurrent.TimeUnit;
 
 
 public class BaseClass {
-    public static WebDriver driver;
+    private static WebDriver driver;
+    public static WebDriver getDriver(){
+        return driver;
+    }
+
 
     /**
      * Method creates, configures and returns it
