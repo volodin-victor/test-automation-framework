@@ -13,11 +13,11 @@ Feature: Sauce demo login
     When User enters valid username
     And User leaves password empty
     And Click on login button
-    Then I validate that "Epic sadface: Password is required" message is displayed
+    Then I validate that message is displayed as "Epic sadface: Password is required"
 
   @login3
   Scenario: Invalid login
     When User enters invalid username as "random_username"
     And User enters valid password as "random_password"
     And Click on login button
-    Then I validate that "Epic sadface: Username and password do not match any user in this service" message is displayed
+    Then I validate that message is displayed as "Epic sadface: Username and password do not match any user in this service"
