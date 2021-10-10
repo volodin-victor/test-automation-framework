@@ -356,4 +356,24 @@ public class CommonMethods extends PageInitializer {
         return sDateFormat.format(date);
     }
 
+    /**
+     * Method takes parameter width from properties and casts it in short and returns as an integer
+     *
+     * @return screen width
+     */
+    public static int scrWidth() {
+        String width = ConfigsReader.getProperty("width");
+        return Short.parseShort(width);
+    }
+
+    /**
+     * Method takes parameter width from properties and casts it in short and returns as an integer
+     *
+     * @return screen height
+     */
+    public static int scrHeight() {
+        String width = ConfigsReader.getProperty("height");
+        return Short.parseShort(width);
+    }
+
 }
