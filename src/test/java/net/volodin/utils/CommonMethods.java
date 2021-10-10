@@ -7,7 +7,6 @@
  */
 package net.volodin.utils;
 
-import net.volodin.testbase.BaseClass;
 import net.volodin.testbase.PageInitializer;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
@@ -24,15 +23,6 @@ import java.util.List;
 import java.util.Set;
 
 public class CommonMethods extends PageInitializer {
-    /**
-     * Method returns current title of the Web-element
-     *
-     * @return
-     */
-    public static String getTitle() {
-        return BaseClass.getDriver().getTitle();
-    }
-
     /**
      * Clears text box and sends another text
      *
@@ -109,7 +99,7 @@ public class CommonMethods extends PageInitializer {
      */
     public static void acceptAlert() {
         try {
-            Alert alert = BaseClass.getDriver().switchTo().alert();
+            Alert alert = driver.switchTo().alert();
             alert.accept();
         } catch (NoAlertPresentException e) {
             e.printStackTrace();
@@ -121,7 +111,7 @@ public class CommonMethods extends PageInitializer {
      */
     public static void dismissAlert() {
         try {
-            Alert alert = BaseClass.getDriver().switchTo().alert();
+            Alert alert = driver.switchTo().alert();
             alert.dismiss();
         } catch (NoAlertPresentException e) {
             e.printStackTrace();
@@ -137,7 +127,7 @@ public class CommonMethods extends PageInitializer {
         String alertText = null;
 
         try {
-            Alert alert = BaseClass.getDriver().switchTo().alert();
+            Alert alert = driver.switchTo().alert();
             alertText = alert.getText();
         } catch (NoAlertPresentException e) {
             e.printStackTrace();
@@ -153,7 +143,7 @@ public class CommonMethods extends PageInitializer {
      */
     public static void sendAlertText(String text) {
         try {
-            Alert alert = BaseClass.getDriver().switchTo().alert();
+            Alert alert = driver.switchTo().alert();
             alert.sendKeys(text);
         } catch (NoAlertPresentException e) {
             e.printStackTrace();
@@ -167,7 +157,7 @@ public class CommonMethods extends PageInitializer {
      */
     public static void switchToFrame(String nameOrId) {
         try {
-            BaseClass.getDriver().switchTo().frame(nameOrId);
+            driver.switchTo().frame(nameOrId);
         } catch (NoSuchFrameException e) {
             e.printStackTrace();
         }
@@ -180,7 +170,7 @@ public class CommonMethods extends PageInitializer {
      */
     public static void switchToFrame(int index) {
         try {
-            BaseClass.getDriver().switchTo().frame(index);
+            driver.switchTo().frame(index);
         } catch (NoSuchFrameException e) {
             e.printStackTrace();
         }
@@ -193,7 +183,7 @@ public class CommonMethods extends PageInitializer {
      */
     public static void switchToFrame(WebElement element) {
         try {
-            BaseClass.getDriver().switchTo().frame(element);
+            driver.switchTo().frame(element);
         } catch (NoSuchFrameException e) {
             e.printStackTrace();
         }
@@ -203,11 +193,11 @@ public class CommonMethods extends PageInitializer {
      * Method switches focus to a child window
      */
     public static void switchToChildWindow() {
-        String mainWindow = BaseClass.getDriver().getWindowHandle();
-        Set<String> windows = BaseClass.getDriver().getWindowHandles();
+        String mainWindow = driver.getWindowHandle();
+        Set<String> windows = driver.getWindowHandles();
         for (String window : windows) {
             if (window.equals(mainWindow)) {
-                BaseClass.getDriver().switchTo().window(window);
+                driver.switchTo().window(window);
             }
         }
     }
@@ -218,7 +208,7 @@ public class CommonMethods extends PageInitializer {
      * @return WebDriverWait object
      */
     public static WebDriverWait getWaitObject() {
-        return new WebDriverWait(BaseClass.getDriver(), Constants.EXPLICIT_WAIT_TIME);
+        return new WebDriverWait(driver, Constants.EXPLICIT_WAIT_TIME);
     }
 
     /**
@@ -270,7 +260,7 @@ public class CommonMethods extends PageInitializer {
      * @return JavascriptExecutor object
      */
     public static JavascriptExecutor getJsObject() {
-        JavascriptExecutor js = (JavascriptExecutor) BaseClass.getDriver();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
         return js;
     }
 
@@ -338,10 +328,8 @@ public class CommonMethods extends PageInitializer {
      * @return bytes
      */
     public static byte[] takeScreenshot(String filename) {
-        TakesScreenshot takeScreenSht = (TakesScreenshot) BaseClass.getDriver();
-
+        TakesScreenshot takeScreenSht = (TakesScreenshot) driver;
         byte[] pictureByte = takeScreenSht.getScreenshotAs(OutputType.BYTES);
-
         File pictureFile = takeScreenSht.getScreenshotAs(OutputType.FILE);
         String fileDest = Constants.SCREENSHOT_FILEPATH + filename + getTimeStamp()
                 + "." + ConfigsReader.getProperty("screenshotFormat");
@@ -366,26 +354,6 @@ public class CommonMethods extends PageInitializer {
         );
 
         return sDateFormat.format(date);
-    }
-
-    /**
-     * Method takes parameter width from properties and casts it in short and returns as an integer
-     *
-     * @return screen width
-     */
-    public static int scrWidth() {
-        String width = ConfigsReader.getProperty("width");
-        return Short.parseShort(width);
-    }
-
-    /**
-     * Method takes parameter width from properties and casts it in short and returns as an integer
-     *
-     * @return screen height
-     */
-    public static int scrHeight() {
-        String width = ConfigsReader.getProperty("height");
-        return Short.parseShort(width);
     }
 
 }
