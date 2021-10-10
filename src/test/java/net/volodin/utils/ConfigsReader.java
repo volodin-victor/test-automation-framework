@@ -13,7 +13,7 @@ public class ConfigsReader {
      *
      * @param filePath Full path to the config file
      */
-    public static void readProperties(String filePath) {
+    private static void readProperties(String filePath) {
         try {
             FileInputStream fileInputStream = new FileInputStream(filePath);
             prop = new Properties();
@@ -37,7 +37,7 @@ public class ConfigsReader {
      * @return Property of input value
      */
     public static String getProperty(String key) {
+        readProperties(Constants.CONFIGURATION_FILEPATH);
         return prop.getProperty(key);
     }
-
 }
