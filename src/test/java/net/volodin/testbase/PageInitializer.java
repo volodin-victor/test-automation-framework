@@ -6,7 +6,7 @@ import net.volodin.pages.MainPage;
 /**
  * Method performs initialization
  */
-public class PageInitializer extends BaseClass {
+public class PageInitializer{
     public static LoginPage loginPage;
     public static MainPage mainPage;
 
