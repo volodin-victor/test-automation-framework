@@ -42,59 +42,30 @@ public class BaseClass {
      */
     public static WebDriver setUp(String testEnv) {
         String browser = ConfigsReader.getProperty("browser").toLowerCase();
-        Dimension size = new Dimension(CommonMethods.scrWidth(), CommonMethods.scrHeight());
-        Point position = new Point(0, 0);
 
         if (testEnv.equals("local")) {
             switch (browser) {
                 case "chrome":
-                    ChromeOptions chromeOptions = new ChromeOptions();
-                    WebDriverManager.chromedriver().setup();
-                    Map<String, Object> chromePreferences = new HashMap<>();
-
-                    chromePreferences.put("profile.default_content_settings.geolocation", 2);
-                    chromePreferences.put("download.prompt_for_download", false);
-                    chromePreferences.put("download.directory_upgrade", true);
-                    chromePreferences.put("credentials_enable_service", false);
-                    chromePreferences.put("password_manager_enabled", false);
-                    chromeOptions.addArguments("--start-maximized");
-                    chromeOptions.setExperimentalOption("prefs", chromePreferences);
-                    System.setProperty(ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, "true");
-                    if (Boolean.parseBoolean(ConfigsReader.getProperty("headless"))) {
-                        chromeOptions.setHeadless(true);
-                        chromeOptions.addArguments("--window-size=" + size.getWidth() + "," + size.getWidth());
-                        chromeOptions.addArguments("--disable-gpu");
-                    }
-                    driver = new ChromeDriver(chromeOptions);
+                    driver = ChromeInit.getDriver();
                     break;
                 case "firefox":
-                    WebDriverManager.firefoxdriver().setup();
-                    FirefoxOptions firefoxOptions = new FirefoxOptions();
-                    if (Boolean.parseBoolean(ConfigsReader.getProperty("headless"))) {
-                        FirefoxBinary firefoxBinary = new FirefoxBinary();
-                        firefoxBinary.addCommandLineOptions("--headless");
-                        firefoxOptions.setBinary(firefoxBinary);
-                    }
-                    driver = new FirefoxDriver(firefoxOptions);
+                    driver = FirefoxInit.getDriver();
                     break;
                 case "safari":
-                    driver = new SafariDriver();
-                    driver.manage().window().setPosition(position);
-                    driver.manage().window().setSize(size);
+                    driver = SafariInit.getDriver();
                     break;
                 case "edge":
-                    WebDriverManager.edgedriver().setup();
-                    driver = new EdgeDriver();
+                    driver = EdgeInit.getDriver();
                     break;
                 case "ie":
-                    WebDriverManager.iedriver().setup();
-                    driver = new InternetExplorerDriver();
+                    driver = InternetExplorerInit.getDriver();
+                    break;
+                case "opera":
+                    driver = OperaInit.getDriver();
                     break;
                 default:
                     throw new RuntimeException("Driver is not implemented for: " + browser);
             }
-
-
         } else if (testEnv.equals("grid")) {
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setBrowserName(browser);

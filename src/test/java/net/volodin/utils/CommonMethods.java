@@ -7,6 +7,7 @@
  */
 package net.volodin.utils;
 
+import net.volodin.testbase.BaseClass;
 import net.volodin.testbase.PageInitializer;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
@@ -23,6 +24,15 @@ import java.util.List;
 import java.util.Set;
 
 public class CommonMethods extends PageInitializer {
+    /**
+     * Method returns current title of the Web-element
+     *
+     * @return
+     */
+    public static String getTitle() {
+        return BaseClass.getDriver().getTitle();
+    }
+
     /**
      * Clears text box and sends another text
      *
@@ -99,7 +109,7 @@ public class CommonMethods extends PageInitializer {
      */
     public static void acceptAlert() {
         try {
-            Alert alert = getDriver().switchTo().alert();
+            Alert alert = BaseClass.getDriver().switchTo().alert();
             alert.accept();
         } catch (NoAlertPresentException e) {
             e.printStackTrace();
@@ -111,7 +121,7 @@ public class CommonMethods extends PageInitializer {
      */
     public static void dismissAlert() {
         try {
-            Alert alert = getDriver().switchTo().alert();
+            Alert alert = BaseClass.getDriver().switchTo().alert();
             alert.dismiss();
         } catch (NoAlertPresentException e) {
             e.printStackTrace();
@@ -127,7 +137,7 @@ public class CommonMethods extends PageInitializer {
         String alertText = null;
 
         try {
-            Alert alert = getDriver().switchTo().alert();
+            Alert alert = BaseClass.getDriver().switchTo().alert();
             alertText = alert.getText();
         } catch (NoAlertPresentException e) {
             e.printStackTrace();
@@ -143,7 +153,7 @@ public class CommonMethods extends PageInitializer {
      */
     public static void sendAlertText(String text) {
         try {
-            Alert alert = getDriver().switchTo().alert();
+            Alert alert = BaseClass.getDriver().switchTo().alert();
             alert.sendKeys(text);
         } catch (NoAlertPresentException e) {
             e.printStackTrace();
@@ -157,7 +167,7 @@ public class CommonMethods extends PageInitializer {
      */
     public static void switchToFrame(String nameOrId) {
         try {
-            getDriver().switchTo().frame(nameOrId);
+            BaseClass.getDriver().switchTo().frame(nameOrId);
         } catch (NoSuchFrameException e) {
             e.printStackTrace();
         }
@@ -170,7 +180,7 @@ public class CommonMethods extends PageInitializer {
      */
     public static void switchToFrame(int index) {
         try {
-            getDriver().switchTo().frame(index);
+            BaseClass.getDriver().switchTo().frame(index);
         } catch (NoSuchFrameException e) {
             e.printStackTrace();
         }
@@ -183,7 +193,7 @@ public class CommonMethods extends PageInitializer {
      */
     public static void switchToFrame(WebElement element) {
         try {
-            getDriver().switchTo().frame(element);
+            BaseClass.getDriver().switchTo().frame(element);
         } catch (NoSuchFrameException e) {
             e.printStackTrace();
         }
@@ -193,11 +203,11 @@ public class CommonMethods extends PageInitializer {
      * Method switches focus to a child window
      */
     public static void switchToChildWindow() {
-        String mainWindow = getDriver().getWindowHandle();
-        Set<String> windows = getDriver().getWindowHandles();
+        String mainWindow = BaseClass.getDriver().getWindowHandle();
+        Set<String> windows = BaseClass.getDriver().getWindowHandles();
         for (String window : windows) {
             if (window.equals(mainWindow)) {
-                getDriver().switchTo().window(window);
+                BaseClass.getDriver().switchTo().window(window);
             }
         }
     }
@@ -208,7 +218,7 @@ public class CommonMethods extends PageInitializer {
      * @return WebDriverWait object
      */
     public static WebDriverWait getWaitObject() {
-        return new WebDriverWait(getDriver(), Constants.EXPLICIT_WAIT_TIME);
+        return new WebDriverWait(BaseClass.getDriver(), Constants.EXPLICIT_WAIT_TIME);
     }
 
     /**
@@ -260,7 +270,7 @@ public class CommonMethods extends PageInitializer {
      * @return JavascriptExecutor object
      */
     public static JavascriptExecutor getJsObject() {
-        JavascriptExecutor js = (JavascriptExecutor) getDriver();
+        JavascriptExecutor js = (JavascriptExecutor) BaseClass.getDriver();
         return js;
     }
 
@@ -328,8 +338,10 @@ public class CommonMethods extends PageInitializer {
      * @return bytes
      */
     public static byte[] takeScreenshot(String filename) {
-        TakesScreenshot takeScreenSht = (TakesScreenshot) getDriver();
+        TakesScreenshot takeScreenSht = (TakesScreenshot) BaseClass.getDriver();
+
         byte[] pictureByte = takeScreenSht.getScreenshotAs(OutputType.BYTES);
+
         File pictureFile = takeScreenSht.getScreenshotAs(OutputType.FILE);
         String fileDest = Constants.SCREENSHOT_FILEPATH + filename + getTimeStamp()
                 + "." + ConfigsReader.getProperty("screenshotFormat");
