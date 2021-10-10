@@ -19,6 +19,6 @@ public class LoginPage {
     public WebElement errorMsg;
 
     public LoginPage() {
-        PageFactory.initElements(BaseClass.driver, this);
+        PageFactory.initElements(BaseClass.getDriver(), this);
     }
 }
