@@ -7,15 +7,12 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class MainPage {
+public class ChcktFnlStepPage {
 
-    @FindBy(className = "app_logo")
-    public WebElement appLogo;
+    @FindBy(className ="inventory_item_name")
+    public WebElement itemName;
 
-    @FindBy(className = "inventory_item_name")
-    public List<WebElement> itemList;
-
-    public MainPage() {
+    public ChcktFnlStepPage() {
         PageFactory.initElements(BaseClass.getDriver(), this);
     }
 }

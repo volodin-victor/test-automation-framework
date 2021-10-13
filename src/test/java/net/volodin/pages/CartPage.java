@@ -5,17 +5,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import java.util.List;
+public class CartPage {
+    @FindBy(xpath = "//div[@id='cart_contents_container']//button[@id='checkout']")
+    public WebElement checkoutBtn;
 
-public class MainPage {
-
-    @FindBy(className = "app_logo")
-    public WebElement appLogo;
-
-    @FindBy(className = "inventory_item_name")
-    public List<WebElement> itemList;
-
-    public MainPage() {
+    public CartPage() {
         PageFactory.initElements(BaseClass.getDriver(), this);
     }
 }
