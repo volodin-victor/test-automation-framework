@@ -1,5 +1,6 @@
 package net.volodin.steps;
 
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -7,6 +8,9 @@ import net.volodin.utils.CommonMethods;
 import net.volodin.utils.ConfigsReader;
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
+
+import java.util.List;
+import java.util.Map;
 
 public class CheckoutSteps extends CommonMethods {
     @Given("User is actually successfully logged in")
@@ -57,6 +61,14 @@ public class CheckoutSteps extends CommonMethods {
     public void i_verify_the_item_name_matches_that_of(String itemName) {
         Assert.assertTrue(checkoutFinalStepPage.itemName.isDisplayed());
         Assert.assertEquals(itemName, checkoutFinalStepPage.itemName.getText());
+    }
+
+    @When("I provide dataTable info")
+    public void i_provide_data_table_info(DataTable dataTable) {
+        System.out.println(dataTable);
+        System.out.println("--------------------------------------");
+        List<Map<String, String>> mapList = dataTable.asMaps();
+        System.out.println(mapList);
     }
 
 }
