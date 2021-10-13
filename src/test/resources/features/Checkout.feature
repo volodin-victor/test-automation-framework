@@ -19,3 +19,10 @@ Feature: Checkout
       | Sauce Labs Backpack     | TestFirstNameFirst  | TestLastnameFirst  | 90210   |
       | Sauce Labs Bolt T-Shirt | TestFirstNameSecond | TestLastnameSecond | 92011   |
       | Sauce Labs Onesie       | TestFirstNameThird  | TestLastnameThird  | 95821   |
+
+
+  Scenario: Print dataTable info
+    When I provide dataTable info
+      | Item                    | FirstName           | LastName           | ZipCode |
+      | Sauce Labs Backpack     | TestFirstNameFirst  | TestLastnameFirst  | 90210   |
+      | Sauce Labs Bolt T-Shirt | TestFirstNameSecond | TestLastnameSecond | 92011   |
