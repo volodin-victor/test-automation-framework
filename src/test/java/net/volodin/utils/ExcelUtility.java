@@ -101,7 +101,7 @@ public class ExcelUtility {
      * @param sheetName Sheet's name of Excel book
      * @return List of maps
      */
-    public static List<Map<String, String>> excelIntoListofMaps(String filePath, String sheetName) {
+    public static List<Map<String, String>> excelIntoListOfMaps(String filePath, String sheetName) {
         openExcel(filePath);
         loadSheet(sheetName);
 
