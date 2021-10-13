@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/features",
         glue = "net.volodin.steps",
         dryRun = false,
-        tags = "@login",
+        tags = "@checkout",
         monochrome = true,
         plugin = {
                 "pretty",

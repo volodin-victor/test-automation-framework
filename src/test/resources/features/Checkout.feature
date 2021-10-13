@@ -1,21 +1,21 @@
 #Author: Victor Volodin, 2021
 @checkout
-Feature: Title of your feature
+Feature: Checkout
 
   Background:
-    Given User is successfully logged in
+    Given User is actually successfully logged in
 
   Scenario Outline: Order checkout
-    When I click on item "<Item>"
-    And I click on add to card button
-    And I click on shopping cart button
-    And I click on checkout button
-    And I enter the order information as "<FirstName>", "<LastName>">, "<ZipCode>"
-    And I click on continue
-    Then I verify that the item name matches "<Item>"
+    When I click on the item with name "<Item>"
+    And I click on the add to card button
+    And I click on the shopping cart button
+    And I click on the checkout button
+    And I enter the the order information as "<FirstName>", "<LastName>">, "<ZipCode>"
+    And I click on the continue
+    Then I verify the item name matches that of "<Item>"
 
     Examples:
-      | Item                     | FirstName           | LastName           | ZipCode |
-      | Sauce Labs Backpack      | TestFirstNameFirst  | TestLastnameFirst  | 90210   |
-      | Sauce Labs Fleece Jacket | TestFirstNameSecond | TestLastnameSecond | 92011   |
-      | Sauce Labs Onesie        | TestFirstNameThird  | TestLastnameThird  | 95821   |
+      | Item                    | FirstName           | LastName           | ZipCode |
+      | Sauce Labs Backpack     | TestFirstNameFirst  | TestLastnameFirst  | 90210   |
+      | Sauce Labs Bolt T-Shirt | TestFirstNameSecond | TestLastnameSecond | 92011   |
+      | Sauce Labs Onesie       | TestFirstNameThird  | TestLastnameThird  | 95821   |
