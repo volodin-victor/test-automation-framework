@@ -1,3 +1,4 @@
+#Author: Victor Volodin, 2021
 @login
 Feature: Sauce demo login
 
